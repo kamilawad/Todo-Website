@@ -12,11 +12,13 @@
     <title>Todo List</title>
 </head>
 <body>
-    <div id="todo">
+    <div class="flex column center todo" id="todo">
         <h2>Todo List</h2>
-        <input type="text" id="newTodo" placeholder="New Todo">
-        <button onclick="addTodo()" class="add-btn"><i class="fa-solid fa-plus"></i></button>
-        <ul id="todoList"></ul>
+        <div>
+            <input type="text" id="newTodo" placeholder="New Todo">
+            <button onclick="addTodo()" class="add-btn"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <ul class="flex column center" id="todoList"></ul>
     </div>
 </body>
 <script src="../scripts/index.js"></script>

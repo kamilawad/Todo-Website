@@ -9,28 +9,34 @@ form.addEventListener("submit",(e)=>{
   }
 })
 
-function addTodo() {
+function generateTodo() {
   const todo = document.getElementById('newTodo').value;
-  if(todo) {
-      const li = document.createElement('li');
-      li.textContent = todo;
-      const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Delete';
-      deleteButton.style.padding = '10px'
-      deleteButton.style.margin = '8px'
-      deleteButton.onclick = function() {
-          this.parentElement.remove();
-      };
-      const completeButton = document.createElement('button');
-      completeButton.textContent = 'Complete ';
-      completeButton.style.padding = '10px'
-      completeButton.style.margin = '8px'
-      completeButton.onclick = function() {
-          this.parentElement.style.textDecoration = 'line-through';
-      };
-      li.appendChild(deleteButton);
-      li.appendChild(completeButton);
-      document.getElementById('todoList').appendChild(li);
-      document.getElementById('newTodo').value = '';
+  if(todo){
+    return `<p class="paragraph">${todo}</p>
+            <div>
+              <button class="delete"><i class="fa-solid fa-delete-left"></i></button>
+              <button class="complete"><i class="fa-solid fa-check"></i></button>
+            </div>`
+  }
+}
+
+function addTodo() {
+  const listContent = generateTodo();
+  if (listContent) {
+    const li = document.createElement('li');
+    li.innerHTML = generateTodo();
+    li.classList.add('flex','row', 'justify-between');
+    document.getElementById('todoList').appendChild(li);
+    document.getElementById('newTodo').value = '';
+
+    const deleteButton = li.querySelector('.delete');
+    deleteButton.addEventListener("click", function() {
+      this.parentElement.parentElement.remove();
+    });
+    const completeButton = li.querySelector('.complete');
+    completeButton.addEventListener("click", function () {
+      const p = li.querySelector('.paragraph');
+      p.classList.add('completed');
+    });
   }
 }
